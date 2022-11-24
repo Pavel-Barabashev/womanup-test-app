@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { addDoc, doc } from "firebase/firestore";
+import dayjs from "dayjs";
 
-export const EntryCreationForm = () => {
+export const EntryCreationForm = ({ entriesCollectionRef }) => {
   let [title, setTitle] = useState("");
   let [text, setText] = useState("");
-  async function createEntry(event) {
-    event.preventDefault();
+  async function createEntry() {
     let entry = {
       title,
       text,
@@ -20,11 +20,7 @@ export const EntryCreationForm = () => {
   }
 
   return (
-    <form
-      onSubmit={(event) => {
-        createEntry(event);
-      }}
-    >
+    <form>
       <label htmlFor="title">Title:</label>
       <input
         value={title}
@@ -43,7 +39,15 @@ export const EntryCreationForm = () => {
         }}
         name="text"
       />
-      <input type="submit" value="create entry!" />
+      <button
+        onClick={(event) => {
+          createEntry();
+          event.preventDefault();
+        }}
+      >
+        create entry
+      </button>
+      <button>close</button>
     </form>
   );
 };

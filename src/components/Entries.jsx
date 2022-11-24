@@ -4,11 +4,14 @@ import { db } from "../firebase";
 import { addDoc, collection, getDocs } from "@firebase/firestore";
 import { EntryEditForm } from "./EntryEditForm";
 import dayjs from "dayjs";
+import { EntryCreationForm } from "./EntryCreationForm";
 
 export const Entries = () => {
   let [entries, setEntries] = useState([]);
   let [editableEntry, setEditableEntry] = useState({});
   let [isEntryEditViewVisible, setIsEntryEditViewVisible] = useState(false);
+  let [isEntryCreationViewVisible, setIsEntryCreationViewVisible] =
+    useState(false);
   let entriesCollectionRef = collection(db, "entries");
 
   useEffect(() => {
@@ -19,29 +22,41 @@ export const Entries = () => {
     getEntries();
   }, []);
   return (
-    <div>
-      {entries.map((entry) => {
-        return (
-          <div key={entry.id}>
-            <p>{entry.title}</p>
-            <p>{entry.text}</p>
-            <button
-              onClick={() => {
-                setEditableEntry(entry);
-                setIsEntryEditViewVisible(true);
-              }}
-            >
-              Edit
-            </button>
-          </div>
-        );
-      })}
-      {isEntryEditViewVisible ? (
-        <EntryEditForm
-          editableEntry={editableEntry}
-          setIsEntryEditViewVisible={setIsEntryEditViewVisible}
-        />
+    <>
+      <button
+        onClick={() => {
+          setIsEntryCreationViewVisible(true);
+        }}
+      >
+        Create entry
+      </button>
+      {isEntryCreationViewVisible ? (
+        <EntryCreationForm entriesCollectionRef={entriesCollectionRef} />
       ) : null}
-    </div>
+      <div className="entries-container">
+        {entries.map((entry) => {
+          return (
+            <div className="entry-card" key={entry.id}>
+              <h2>{entry.title}</h2>
+              <p>{entry.text}</p>
+              <button
+                onClick={() => {
+                  setEditableEntry(entry);
+                  setIsEntryEditViewVisible(true);
+                }}
+              >
+                Edit
+              </button>
+            </div>
+          );
+        })}
+        {isEntryEditViewVisible ? (
+          <EntryEditForm
+            editableEntry={editableEntry}
+            setIsEntryEditViewVisible={setIsEntryEditViewVisible}
+          />
+        ) : null}
+      </div>
+    </>
   );
 };

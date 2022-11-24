@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { db } from "../firebase";
-import { addDoc, collection, getDocs } from "@firebase/firestore";
+import { collection, getDocs, updateDoc, doc } from "@firebase/firestore";
 import { EntryEditForm } from "./EntryEditForm";
 import dayjs from "dayjs";
 import { EntryCreationForm } from "./EntryCreationForm";
@@ -36,10 +36,18 @@ export const Entries = () => {
       <div className="entries-container">
         {entries.map((entry) => {
           return (
-            <div className="entry-card" key={entry.id}>
+            <div
+              className={
+                entry.completed
+                  ? "entry-card-complete"
+                  : "entry-card-incomplete"
+              }
+              key={entry.id}
+            >
               <h2>{entry.title}</h2>
               <p>{entry.text}</p>
               <button
+                disabled={entry.completed}
                 onClick={() => {
                   setEditableEntry(entry);
                   setIsEntryEditViewVisible(true);
@@ -47,6 +55,15 @@ export const Entries = () => {
               >
                 Edit
               </button>
+              <input
+                disabled={entry.completed}
+                onClick={async () => {
+                  let entryDoc = doc(db, "entries", entry.id);
+                  let newFields = { completed: true };
+                  await updateDoc(entryDoc, newFields);
+                }}
+                type="radio"
+              />
             </div>
           );
         })}

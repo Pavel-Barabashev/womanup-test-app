@@ -12,6 +12,7 @@ textarea {
 button {
   border: none;
   border-radius: 3%;
+  font-weight: bold;
   background-color: #7982ad;
 }
 .entries-container {
@@ -20,9 +21,13 @@ button {
   column-gap: 10%;
   grid-template-columns: repeat(3, 1fr);
 }
-.entry-card {
+.entry-card-incomplete {
   background-color: #64643e;
   border-radius: 2%;
+}
+.entry-card-complete {
+  background-color: #272727;
+  color: blanchedalmond;
 }
 form {
   display: flex;

@@ -10,33 +10,56 @@
 }
 body {
   background-color: #585252;
+  scrollbar-color: black;
+}
+header {
+  width: 100%;
+  height: 50px;
+  margin-bottom: 5%;
+  box-shadow: 0px 3px 3px 1px black;
+  background-color: #3d3d3d;
+  display: flex;
+  justify-content: center;
+}
+.main-wrapper {
+  max-width: fit-content;
+  height: 100%;
+  padding-left: 5%;
+  padding-right: 5%;
 }
 input {
   border: none;
+  border-radius: 5px;
   background-color: #979797;
 }
 textarea {
+  border-radius: 5px;
   border: none;
   background-color: #979797;
 }
 button {
   border: none;
+  width: 40%;
   box-shadow: 0px 0px 3px 2px black;
   border-radius: 7px;
-  font-weight: bold;
-  background: #7982ad;
+  color: bisque;
+  font-weight: 500;
+  background: #3865e0;
   transition: all 0.5s;
 }
 button:hover {
-  background: #3865e0;
-  color: #f8daa1;
+  background: #7982ad;
+  color: #000000;
   box-shadow: 2px 2px 3px 2px black;
 }
 button:active {
   background: black;
 }
+button:disabled {
+  background: gray;
+}
 .entry-creation-form {
-  background: #306b34;
+  background: #31404d;
 }
 .entries-container {
   display: grid;
@@ -49,15 +72,18 @@ img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  box-shadow: 0px 0px 3px 2px black;
 }
 .entry-card-incomplete {
   height: 40%;
   overflow-y: scroll;
-  background-color: #64643e;
+  background-color: #4b4b4a;
   border-radius: 2%;
   box-shadow: 0px 0px 7px 5px black;
 }
 .entry-card-complete {
+  height: 40%;
+  overflow-y: scroll;
   background-color: #272727;
   color: blanchedalmond;
   box-shadow: 0px 0px 7px 5px black;
@@ -65,18 +91,29 @@ img {
 form {
   display: flex;
   flex-direction: column;
-  width: 40%;
+  align-items: center;
+  max-width: fit-content;
+  border-radius: 10px;
   box-shadow: 0px 0px 7px 5px black;
+}
+form button {
+  margin-bottom: 5%;
 }
 .entry-edit-create-container {
   width: 100%;
   display: flex;
   justify-content: center;
 }
+.entry-edit-form {
+  background-color: gray;
+}
 .due-date-p {
   font-size: small;
 }
 .due-date-expiration-notification-p {
-  color: #bb0a21;
+  color: #790716;
+}
+.entry-creation-button {
+  height: 100%;
 }
 /*# sourceMappingURL=App.css.map */

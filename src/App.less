@@ -1,14 +1,13 @@
 @main-box-shadow: 0px 0px 7px 5px black;
+@img-box-shadow:0px 0px 3px 2px black;
 @button-box-shadow: 0px 0px 3px 2px black;
 @button-box-shadow-hover: 2px 2px 3px 2px black;
+@header-box-shadow:0px 3px 3px 1px black;
 
-@mainColor1: #306b34;
-@mainColor2: #82d173;
-@mainColor3: #42113c;
-@mainColor4: #4d243d;
-@accentColor: #bb0a21;
-@textColor: #ffffff;
-@bgColor: #111111;
+@complete-entry-backgound: rgb(39, 39, 39);
+@incomplete-entry-backgound: rgb(75, 75, 74);
+
+@beautiful-green: #306b34;
 
 .screen-center {
   position: absolute;
@@ -22,35 +21,61 @@
 
 body {
   background-color: rgb(88, 82, 82);
+  scrollbar-color: black;
 }
+
+header {
+  width: 100%;
+  height: 50px;
+  margin-bottom: 5%;
+  box-shadow: @header-box-shadow;
+  background-color: rgb(61, 61, 61);
+  display: flex;
+  justify-content: center;
+}
+.main-wrapper {
+  max-width: fit-content;
+  height: 100%;
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
 input {
   border: none;
+  border-radius: 5px;
   background-color: rgb(151, 151, 151);
 }
 textarea {
+  border-radius: 5px;
   border: none;
   background-color: rgb(151, 151, 151);
 }
 
 button {
   border: none;
+  width: 40%;
   box-shadow: @button-box-shadow;
   border-radius: 7px;
-  font-weight: bold;
-  background: rgb(121, 130, 173);
+  color: bisque;
+  font-weight: 500;
+  background: rgb(56, 101, 224);
+
   transition: all 0.5s;
   &:hover {
-    background: rgb(56, 101, 224);
-    color: rgb(248, 218, 161);
+    background: rgb(121, 130, 173);
+    color: rgb(0, 0, 0);
     box-shadow: @button-box-shadow-hover;
   }
   &:active {
     background: black;
   }
+  &:disabled {
+    background: gray;
+  }
 }
 
 .entry-creation-form {
-  background: #306b34;
+  background: rgb(49, 64, 77);
 }
 
 .entries-container {
@@ -65,29 +90,35 @@ img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  box-shadow: @img-box-shadow;
 }
-// ::-webkit-scrollbar-track {
-//   background-color: #82d173;
-// }
 
 .entry-card-incomplete {
   height: 40%;
   overflow-y: scroll;
-  background-color: rgb(100, 100, 62);
+  background-color: @incomplete-entry-backgound;
   border-radius: 2%;
   box-shadow: @main-box-shadow;
 }
 
 .entry-card-complete {
-  background-color: rgb(39, 39, 39);
+  height: 40%;
+  overflow-y: scroll;
+  background-color: @complete-entry-backgound;
   color: blanchedalmond;
   box-shadow: @main-box-shadow;
 }
 form {
   display: flex;
   flex-direction: column;
-  width: 40%;
+  align-items: center;
+  max-width: fit-content;
+  border-radius: 10px;
   box-shadow: @main-box-shadow;
+}
+
+form button {
+  margin-bottom: 5%;
 }
 
 .entry-edit-create-container:extend(.screen-center) {
@@ -96,10 +127,18 @@ form {
   justify-content: center;
 }
 
+.entry-edit-form {
+  background-color: gray;
+}
+
 .due-date-p {
   font-size: small;
 }
 
 .due-date-expiration-notification-p {
-  color: #bb0a21;
+  color: #790716;
+}
+
+.entry-creation-button {
+  height: 100%;
 }

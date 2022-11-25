@@ -22,14 +22,17 @@ export const Entries = () => {
     getEntries();
   }, []);
   return (
-    <>
-      <button
-        onClick={() => {
-          setIsEntryCreationViewVisible(true);
-        }}
-      >
-        Create entry
-      </button>
+    <div className="main-wrapper">
+      <header>
+        <button
+          className="entry-creation-button"
+          onClick={() => {
+            setIsEntryCreationViewVisible(true);
+          }}
+        >
+          Create entry
+        </button>
+      </header>
       {isEntryCreationViewVisible ? (
         <EntryCreationForm
           entriesCollectionRef={entriesCollectionRef}
@@ -69,13 +72,13 @@ export const Entries = () => {
                 Edit
               </button>
               <input
-                disabled={entry.completed}
+                disabled={entry.completed ? true : false}
                 onClick={async () => {
                   let entryDoc = doc(db, "entries", entry.id);
                   let newFields = { completed: true };
                   await updateDoc(entryDoc, newFields);
                 }}
-                type="radio"
+                type="checkbox"
               />
             </div>
           );
@@ -87,6 +90,6 @@ export const Entries = () => {
           />
         ) : null}
       </div>
-    </>
+    </div>
   );
 };

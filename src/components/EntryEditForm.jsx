@@ -20,7 +20,7 @@ export const EntryEditForm = ({ editableEntry, setIsEntryEditViewVisible }) => {
 
   return (
     <div className="entry-edit-create-container">
-      <form>
+      <form className="entry-edit-form">
         <label htmlFor="newTitle">Edit title</label>
         <input
           type="text"
@@ -41,6 +41,7 @@ export const EntryEditForm = ({ editableEntry, setIsEntryEditViewVisible }) => {
           name="newText"
         />
         <button
+          disabled={editableEntry.completed ? true : false}
           onClick={(event) => {
             updateEntry();
             event.preventDefault();

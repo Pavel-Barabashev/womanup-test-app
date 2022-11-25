@@ -4,6 +4,11 @@
 @button-box-shadow-hover: 2px 2px 3px 2px black;
 @header-box-shadow:0px 3px 3px 1px black;
 
+@button-font-color: bisque;
+@button-background-color: rgb(56, 101, 224);
+
+@input-and-textarea-background-color: rgb(151, 151, 151);
+
 @complete-entry-backgound: rgb(39, 39, 39);
 @incomplete-entry-backgound: rgb(75, 75, 74);
 
@@ -34,7 +39,7 @@ header {
   justify-content: center;
 }
 .main-wrapper {
-  max-width: fit-content;
+  max-width: 100%;
   height: 100%;
   padding-left: 5%;
   padding-right: 5%;
@@ -43,12 +48,12 @@ header {
 input {
   border: none;
   border-radius: 5px;
-  background-color: rgb(151, 151, 151);
+  background-color: @input-and-textarea-background-color;
 }
 textarea {
   border-radius: 5px;
   border: none;
-  background-color: rgb(151, 151, 151);
+  background-color: @input-and-textarea-background-color;
 }
 
 button {
@@ -56,9 +61,9 @@ button {
   width: 40%;
   box-shadow: @button-box-shadow;
   border-radius: 7px;
-  color: bisque;
+  color: @button-font-color;
   font-weight: 500;
-  background: rgb(56, 101, 224);
+  background: @button-background-color;
 
   transition: all 0.5s;
   &:hover {
@@ -94,7 +99,8 @@ img {
 }
 
 .entry-card-incomplete {
-  height: 40%;
+  height: 70%;
+  margin: 0%;
   overflow-y: scroll;
   background-color: @incomplete-entry-backgound;
   border-radius: 2%;
@@ -102,8 +108,9 @@ img {
 }
 
 .entry-card-complete {
-  height: 40%;
+  height: 70%;
   overflow-y: scroll;
+  overflow-x: hidden;
   background-color: @complete-entry-backgound;
   color: blanchedalmond;
   box-shadow: @main-box-shadow;

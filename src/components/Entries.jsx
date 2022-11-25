@@ -52,7 +52,8 @@ export const Entries = () => {
               key={entry.id}
             >
               <h2>{entry.title}</h2>
-              <img src={entry.fileUrl} />
+
+              {entry.fileUrl ? <img src={entry.fileUrl} /> : null}
               <p className="enrty-text-p">{entry.text}</p>
               <p className="due-date-p">
                 Due date: {new Date(entry.dueDate.seconds * 1000).toString()}
@@ -71,7 +72,9 @@ export const Entries = () => {
               >
                 Edit
               </button>
+              <label htmlFor="complete-checkbox">Complete task</label>
               <input
+                name="complete-checkbox"
                 disabled={entry.completed ? true : false}
                 onClick={async () => {
                   let entryDoc = doc(db, "entries", entry.id);

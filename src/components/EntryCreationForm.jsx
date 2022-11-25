@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { addDoc, doc } from "firebase/firestore";
+import { addDoc } from "firebase/firestore";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import dayjs from "dayjs";
-import { storage, app } from "../firebase";
+import { storage } from "../firebase";
 
 export const EntryCreationForm = ({
   entriesCollectionRef,
@@ -10,30 +10,47 @@ export const EntryCreationForm = ({
 }) => {
   let [title, setTitle] = useState("");
   let [text, setText] = useState("");
-  let [file, setFile] = useState();
-  let [fileUrl, setFileUrl] = useState("");
-  let [dueDate, setDueDate] = useState(Date);
+  let [file, setFile] = useState(null);
+  let [dueDate, setDueDate] = useState(null);
 
   async function createEntry() {
     try {
-      let storageRef = ref(storage, file.name);
-      let uploadFile = await uploadBytesResumable(storageRef, file);
-      getDownloadURL(uploadFile.ref)
-        .then((url) => {
-          let entry = {
-            title,
-            text,
-            dueDate,
-            createdAt: dayjs().toDate(),
-            fileUrl: url,
-          };
-          addDoc(entriesCollectionRef, entry);
-          console.log("created successfully!");
-        })
-        .catch((error) => {
-          throw error;
-        });
+      if (file) {
+        let storageRef = ref(storage, file.name);
+        let uploadFile = await uploadBytesResumable(storageRef, file);
+        getDownloadURL(uploadFile.ref)
+          .then((url) => {
+            let entry = {
+              title,
+              text,
+              dueDate,
+              createdAt: dayjs().toDate(),
+              fileUrl: url,
+            };
+            addDoc(entriesCollectionRef, entry);
+            alert("created successfully!");
+          })
+          .catch((error) => {
+            throw error;
+          });
+      } else {
+        let entry = {
+          title,
+          text,
+          dueDate,
+          createdAt: dayjs().toDate(),
+        };
+        addDoc(entriesCollectionRef, entry)
+          .then(() => {
+            alert("created successfully!");
+          })
+          .catch((error) => {
+            console.log(error);
+            alert("Error");
+          });
+      }
     } catch (error) {
+      alert("Error");
       console.log("Error: ", error);
     }
   }
@@ -70,11 +87,13 @@ export const EntryCreationForm = ({
         />
         <input
           type="file"
+          accept="image/*"
           onChange={(event) => {
             setFile(event.target.files[0]);
           }}
         />
         <button
+          disabled={!title || !text || !dueDate}
           onClick={(event) => {
             createEntry();
             event.preventDefault();

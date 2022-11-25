@@ -1,3 +1,13 @@
+.screen-center,
+.entry-edit-create-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  height: fit-content;
+  width: fit-content;
+}
 body {
   background-color: #585252;
 }
@@ -11,9 +21,22 @@ textarea {
 }
 button {
   border: none;
-  border-radius: 3%;
+  box-shadow: 0px 0px 3px 2px black;
+  border-radius: 7px;
   font-weight: bold;
-  background-color: #7982ad;
+  background: #7982ad;
+  transition: all 0.5s;
+}
+button:hover {
+  background: #3865e0;
+  color: #f8daa1;
+  box-shadow: 2px 2px 3px 2px black;
+}
+button:active {
+  background: black;
+}
+.entry-creation-form {
+  background: #306b34;
 }
 .entries-container {
   display: grid;
@@ -21,21 +44,39 @@ button {
   column-gap: 10%;
   grid-template-columns: repeat(3, 1fr);
 }
+img {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
 .entry-card-incomplete {
+  height: 40%;
+  overflow-y: scroll;
   background-color: #64643e;
   border-radius: 2%;
+  box-shadow: 0px 0px 7px 5px black;
 }
 .entry-card-complete {
   background-color: #272727;
   color: blanchedalmond;
+  box-shadow: 0px 0px 7px 5px black;
 }
 form {
   display: flex;
   flex-direction: column;
+  width: 40%;
+  box-shadow: 0px 0px 7px 5px black;
 }
-.entry-edit-container {
+.entry-edit-create-container {
   width: 100%;
   display: flex;
   justify-content: center;
+}
+.due-date-p {
+  font-size: small;
+}
+.due-date-expiration-notification-p {
+  color: #bb0a21;
 }
 /*# sourceMappingURL=App.css.map */

@@ -31,21 +31,34 @@ export const Entries = () => {
         Create entry
       </button>
       {isEntryCreationViewVisible ? (
-        <EntryCreationForm entriesCollectionRef={entriesCollectionRef} />
+        <EntryCreationForm
+          entriesCollectionRef={entriesCollectionRef}
+          setIsEntryCreationFormVisible={setIsEntryCreationViewVisible}
+        />
       ) : null}
       <div className="entries-container">
         {entries.map((entry) => {
           return (
             <div
               className={
-                entry.completed
+                entry.completed ||
+                new Date(entry.dueDate.seconds * 1000) < dayjs().toDate()
                   ? "entry-card-complete"
                   : "entry-card-incomplete"
               }
               key={entry.id}
             >
               <h2>{entry.title}</h2>
-              <p>{entry.text}</p>
+              <img src={entry.fileUrl} />
+              <p className="enrty-text-p">{entry.text}</p>
+              <p className="due-date-p">
+                Due date: {new Date(entry.dueDate.seconds * 1000).toString()}
+              </p>
+              {new Date(entry.dueDate.seconds * 1000) < dayjs().toDate() ? (
+                <p className="due-date-expiration-notification-p">
+                  The time to perform the task has expired
+                </p>
+              ) : null}
               <button
                 disabled={entry.completed}
                 onClick={() => {

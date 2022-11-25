@@ -19,7 +19,7 @@ export const EntryEditForm = ({ editableEntry, setIsEntryEditViewVisible }) => {
   }
 
   return (
-    <div className="entry-edit-container">
+    <div className="entry-edit-create-container">
       <form>
         <label htmlFor="newTitle">Edit title</label>
         <input
